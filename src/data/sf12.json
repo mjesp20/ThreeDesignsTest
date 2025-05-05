@@ -1,0 +1,171 @@
+{
+    "title": "SF-12 Health Survey",
+    "description": "This survey asks for your views about your health. This information will help keep track of how you feel and how well you are able to do your usual activities.",
+    "instructions": "Please answer every question by selecting the answer that best describes your response. If you are unsure about how to answer a question, please give the best answer you can.",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "In general, would you say your health is:",
+        "answerType": "single",
+        "options": [
+          { "value": "5", "label": "Excellent" },
+          { "value": "4", "label": "Very good" },
+          { "value": "3", "label": "Good" },
+          { "value": "2", "label": "Fair" },
+          { "value": "1", "label": "Poor" }
+        ]
+      },
+      {
+        "id": "q2",
+        "text": "The following questions are about activities you might do during a typical day. Does your health now limit you in these activities? If so, how much?",
+        "subQuestions": [
+          {
+            "id": "q2a",
+            "text": "Moderate activities, such as moving a table, pushing a vacuum cleaner, bowling, or playing golf",
+            "answerType": "single",
+            "options": [
+              { "value": "1", "label": "Yes, limited a lot" },
+              { "value": "2", "label": "Yes, limited a little" },
+              { "value": "3", "label": "No, not limited at all" }
+            ]
+          },
+          {
+            "id": "q2b",
+            "text": "Climbing several flights of stairs",
+            "answerType": "single",
+            "options": [
+              { "value": "1", "label": "Yes, limited a lot" },
+              { "value": "2", "label": "Yes, limited a little" },
+              { "value": "3", "label": "No, not limited at all" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "q3",
+        "text": "During the past 4 weeks, how much of the time have you had any of the following problems with your work or other regular daily activities as a result of your physical health?",
+        "subQuestions": [
+          {
+            "id": "q3a",
+            "text": "Accomplished less than you would like",
+            "answerType": "single",
+            "options": [
+              { "value": "1", "label": "All of the time" },
+              { "value": "2", "label": "Most of the time" },
+              { "value": "3", "label": "Some of the time" },
+              { "value": "4", "label": "A little of the time" },
+              { "value": "5", "label": "None of the time" }
+            ]
+          },
+          {
+            "id": "q3b",
+            "text": "Were limited in the kind of work or other activities",
+            "answerType": "single",
+            "options": [
+              { "value": "1", "label": "All of the time" },
+              { "value": "2", "label": "Most of the time" },
+              { "value": "3", "label": "Some of the time" },
+              { "value": "4", "label": "A little of the time" },
+              { "value": "5", "label": "None of the time" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "q4",
+        "text": "During the past 4 weeks, how much of the time have you had any of the following problems with your work or other regular daily activities as a result of any emotional problems (such as feeling depressed or anxious)?",
+        "subQuestions": [
+          {
+            "id": "q4a",
+            "text": "Accomplished less than you would like",
+            "answerType": "single",
+            "options": [
+              { "value": "1", "label": "All of the time" },
+              { "value": "2", "label": "Most of the time" },
+              { "value": "3", "label": "Some of the time" },
+              { "value": "4", "label": "A little of the time" },
+              { "value": "5", "label": "None of the time" }
+            ]
+          },
+          {
+            "id": "q4b",
+            "text": "Did work or other activities less carefully than usual",
+            "answerType": "single",
+            "options": [
+              { "value": "1", "label": "All of the time" },
+              { "value": "2", "label": "Most of the time" },
+              { "value": "3", "label": "Some of the time" },
+              { "value": "4", "label": "A little of the time" },
+              { "value": "5", "label": "None of the time" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "q5",
+        "text": "During the past 4 weeks, how much did pain interfere with your normal work (including both work outside the home and housework)?",
+        "answerType": "single",
+        "options": [
+          { "value": "1", "label": "Not at all" },
+          { "value": "2", "label": "A little bit" },
+          { "value": "3", "label": "Moderately" },
+          { "value": "4", "label": "Quite a bit" },
+          { "value": "5", "label": "Extremely" }
+        ]
+      },
+      {
+        "id": "q6",
+        "text": "These questions are about how you feel and how things have been with you during the past 4 weeks. For each question, please give the one answer that comes closest to the way you have been feeling. How much of the time during the past 4 weeks...",
+        "subQuestions": [
+          {
+            "id": "q6a",
+            "text": "Have you felt calm and peaceful?",
+            "answerType": "single",
+            "options": [
+              { "value": "1", "label": "All of the time" },
+              { "value": "2", "label": "Most of the time" },
+              { "value": "3", "label": "Some of the time" },
+              { "value": "4", "label": "A little of the time" },
+              { "value": "5", "label": "None of the time" }
+            ]
+          },
+          {
+            "id": "q6b",
+            "text": "Did you have a lot of energy?",
+            "answerType": "single",
+            "options": [
+              { "value": "1", "label": "All of the time" },
+              { "value": "2", "label": "Most of the time" },
+              { "value": "3", "label": "Some of the time" },
+              { "value": "4", "label": "A little of the time" },
+              { "value": "5", "label": "None of the time" }
+            ]
+          },
+          {
+            "id": "q6c",
+            "text": "Have you felt downhearted and depressed?",
+            "answerType": "single",
+            "options": [
+              { "value": "1", "label": "All of the time" },
+              { "value": "2", "label": "Most of the time" },
+              { "value": "3", "label": "Some of the time" },
+              { "value": "4", "label": "A little of the time" },
+              { "value": "5", "label": "None of the time" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "q7",
+        "text": "During the past 4 weeks, how much of the time has your physical health or emotional problems interfered with your social activities (like visiting friends, relatives, etc.)?",
+        "answerType": "single",
+        "options": [
+          { "value": "1", "label": "All of the time" },
+          { "value": "2", "label": "Most of the time" },
+          { "value": "3", "label": "Some of the time" },
+          { "value": "4", "label": "A little of the time" },
+          { "value": "5", "label": "None of the time" }
+        ]
+      }
+    ]
+  }
