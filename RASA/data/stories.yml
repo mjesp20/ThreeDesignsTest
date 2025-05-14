@@ -1,0 +1,35 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: express thanks
+  steps:
+    - intent: thanks
+    - action: utter_thanks
+
+- story: start
+  steps:
+    - intent: start_qna
+    - action: action_ask_next_question
+
+- story: User asks for next question
+  steps:
+    - intent: next_question
+    - action: action_ask_next_question
+
+- story: User asks for explanation
+  steps:
+    - intent: explain_question
+    - action: action_explain_question
+
+- story: User answers question
+  steps:
+    - intent: provide_answer
+    - action: action_ask_next_question
+
+

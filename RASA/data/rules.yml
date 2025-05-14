@@ -1,0 +1,18 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Acknowledge test message
+  steps:
+    - intent: acknowledge_test
+    - action: utter_acknowledge_test
+
+- rule: Start conversation
+  steps:
+    - intent: start_conversation
+    - action: utter_start_conversation

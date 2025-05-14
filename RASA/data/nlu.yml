@@ -1,0 +1,75 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - hej
+    
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+
+- intent: thanks
+  examples: |
+    - thank you
+    - thanks
+    - appreciate it
+    - many thanks
+    
+
+- intent: acknowledge_test
+  examples: |
+    - test
+    - just
+    - testing testing
+
+- intent: start_qna
+  examples: |
+    - Start
+    - I'm ready
+    - Begin
+
+- intent: next_question
+  examples: |
+    - Next question
+    - Im done
+    - Finished
+    - næste
+    - næste spørgsmål
+
+- intent: provide_answer
+  examples: |
+    - Excellent
+    - Very good
+    - Good
+    - Fair
+    - Poor
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+
+- intent: start_conversation
+  examples: |
+    - Conversation
+
+- intent: explain_question
+  examples: |
+    - i do not understand this question?
+    - what?
+    - can you explain?
+    - What do you mean?
+    - Could you elaborate?
+    - Please explain further
+    - I'm confused
+    - What is this about?

@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+react/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -9,6 +9,13 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.rasa
+.venv
+.idea
+/rasa/models
+.next
+/react/.next
+/RASA/actions
 
 # testing
 /coverage
@@ -38,4 +45,4 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+

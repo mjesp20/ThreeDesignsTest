@@ -1,0 +1,55 @@
+version: "3.1"
+
+intents:
+- greet
+- goodbye
+- thanks
+- acknowledge_test
+- start_conversation
+- start_qna
+- provide_answer
+- next_question
+- explain_question
+
+slots: # Correct
+  conversation_id: # Correct indentation under slots
+    type: text # Correct indentation under conversation_id
+    influence_conversation: true # Correct indentation
+    mappings:
+      - type: custom
+
+responses:
+  utter_greet:
+    - text: "Hej, lad os begynde når du er klar!"
+
+  utter_thanks:
+    - text: "Anytime :D"
+
+  utter_goodbye:
+    - text: "Bye :D"
+
+  utter_acknowledge_test:
+    - text: "It works"
+    - text: "yippie"
+
+  utter_qna_finished:
+    - text: "Det var det sidste spørgsmål, tak for at svarer!"
+
+  utter_ask_ready:
+    - text: "Are you ready for the next question?"
+
+  utter_start_conversation:
+    - text: "Hi and welcome to your health conversation"
+
+  utter_which_question_to_explain:
+    - text: "Which question would you like me to explain? You can tell me after I ask it."
+
+  utter_finished_question:
+    - text: "Godt, bare sig 'næste spørgsmål' for at fortsætte"
+
+actions:
+  - action_ask_next_question
+  - action_explain_question
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
