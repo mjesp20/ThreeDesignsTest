@@ -11,10 +11,10 @@ intents:
 - next_question
 - explain_question
 
-slots: # Correct
-  conversation_id: # Correct indentation under slots
-    type: text # Correct indentation under conversation_id
-    influence_conversation: true # Correct indentation
+slots: 
+  conversation_id:
+    type: text 
+    influence_conversation: true 
     mappings:
       - type: custom
 
