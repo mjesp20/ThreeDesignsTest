@@ -1,47 +1,74 @@
 "use client"
 
-import Link from "next/link";
-import styles from './page.module.css'
-import Chatbot from "./chatbot";
-import surveydata from '@/data/sf12.json';
 import { useState, useEffect, useRef } from "react";
+import styles from "./page.module.css";
 
 export default function MixedPage() {
-
-  const [responses, setResponses] = useState({});
+  // State management
+  const [messages, setMessages] = useState([]);
+  const [inputMessage, setInputMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const [metrics, setMetrics] = useState(null);
 
+  // Refs
+  const chatWindowRef = useRef(null);
+  const messagesEndRef = useRef(null); // New ref for auto-scrolling
   const startTimeRef = useRef(null);
-
-
-  const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState('');
+  
+  // API endpoint
   const rasaUrl = 'http://localhost:5005/webhooks/rest/webhook';
 
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  // Initialize timer and click tracking
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+    
+    const handleClick = () => {
+      setClickCount((prev) => prev + 1);
+    };
+    
+    document.addEventListener('click', handleClick);
+    
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
 
-  const chatWindowRef = useRef(null);
+  // Start conversation when component mounts
+  useEffect(() => {
+    sendMessageToRasa('Start');
+  }, []);
+
+  // Auto-scroll chat window when messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  // Scroll to bottom function
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const sendMessageToRasa = async (messageText) => {
     if (!messageText.trim()) return;
 
+    // Add user message to chat
     const newUserMessage = { text: messageText, sender: 'user' };
-    setMessages(prevMessages => [...prevMessages, newUserMessage])
+    setMessages(prevMessages => [...prevMessages, newUserMessage]);
     setInputMessage('');
 
     try {
       const response = await fetch(rasaUrl, {
         method: 'POST',
         headers: {
-          'content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           sender: 'user_id_123',
           message: messageText
         }),
-
       });
 
       if (!response.ok) {
@@ -51,7 +78,7 @@ export default function MixedPage() {
 
       const data = await response.json();
 
-      const rasaMessage = data.map(msg => {
+      const rasaMessages = data.map(msg => {
         if (msg.custom) {
           return {
             sender: 'bot',
@@ -73,7 +100,8 @@ export default function MixedPage() {
         }
       });
 
-      const endMessageReceived = rasaMessage.some(msg =>
+      // Check if this is the end message
+      const endMessageReceived = rasaMessages.some(msg =>
         msg.sender === "bot" && msg.text === 'Det var det sidste spørgsmål, tak for at svarer!'
       );
 
@@ -81,14 +109,13 @@ export default function MixedPage() {
         handleSubmit();
       }
 
-
-      setMessages(prevMessages => [...prevMessages, ...rasaMessage]);
+      // Add bot messages to chat
+      setMessages(prevMessages => [...prevMessages, ...rasaMessages]);
 
     } catch (error) {
       console.error('Network error:', error);
     }
   };
-
 
   const handleInputChange = (event) => {
     setInputMessage(event.target.value);
@@ -100,37 +127,8 @@ export default function MixedPage() {
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      handleSendMessage()
+      handleSendMessage();
     }
-  };
-
-  useEffect(() => {
-    sendMessageToRasa('Hej');
-  }, []);
-
-  useEffect(() => {
-    if (chatWindowRef.current) {
-      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
-    }
-  }, [messages]);
-
-  useEffect(() => {
-    startTimeRef.current = Date.now();
-
-    const handleClick = () => {
-      setClickCount((prev) => prev + 1);
-    };
-
-    document.addEventListener('click', handleClick);
-
-    return () => {
-      document.removeEventListener('click', handleClick);
-    };
-  }, []);
-
-
-  const handlebuttonclick = (buttonPayLoad) => {
-    sendMessageToRasa(buttonPayLoad);
   };
 
   const handleSubmit = () => {
@@ -143,105 +141,83 @@ export default function MixedPage() {
     });
   };
 
+  // Render results after submission
   if (submitted && metrics) {
     return (
-      <div class="mt-4">
-        <h1>Results</h1>
-        <p>Time Spent: {metrics.timeSpent.toFixed(2)} seconds</p>
-        <p>Total Clicks: {metrics.clickCount}</p>
+      <div className={styles.container}>
+        <div className={styles.topbar}>
+          <h1 className={styles.heading}>Results</h1>
+        </div>
+        <div className={styles.content}>
+          <div className={styles.resultsContainer}>
+            <p className={styles.resultItem}>Time Spent: {metrics.timeSpent.toFixed(2)} seconds</p>
+            <p className={styles.resultItem}>Total Clicks: {metrics.clickCount}</p>
+          </div>
+        </div>
+        <div className={styles.endbar}></div>
       </div>
     );
   }
+
+  // Render mixed interface with both form elements and chat
   return (
-
-    <div>
+    <div className={styles.container}>
       <div className={styles.topbar}>
-        <h1 className={styles.heading}>Questionnaire</h1></div>
-
+        <h1 className={styles.heading}>Chatbot alternativ</h1>
+      </div>
+      
       <div className={styles.content}>
-
-        <div className={styles.chatwindow}></div>
-
-        <div>
-          <div className={styles.topbar}>
-            <h1 className={styles.heading}>MixedPage</h1></div>
-
-
-
-          <div className={styles.content}>
-
-            <div className={styles.chatwindow} ref={chatWindowRef}>
-              {messages.map((msg, index) => (
-                <div key={index} className={`${styles.message} ${styles[msg.sender]} `}>
-                  <p>{msg.text}</p>
-
-                  {msg.customType === 'question' && msg.answeroptions && typeof msg.answeroptions === 'number' && msg.answeroptions > 0 && (
-                    <div className={styles.answerboxes}>
-                      {Array.from({ length: msg.answeroptions }, (_, i) => i + 1).map(optionValue => (
-                        <div key={optionValue} className={styles.answeroptions}>
-                          <button className={`${styles.answeroption}${selectedAnswer === `${optionValue}` ? styles.active : ''
-                            }`} 
-                            onClick={() => sendMessageToRasa(`${optionValue}`)}
-                          >
-                          
-                          </button>
-                          <div className={styles.answertext}>{optionValue}</div>
-                        </div>
-                      ))}
-
+        <div className={styles.chatwindow} ref={chatWindowRef}>
+          {messages.map((msg, index) => (
+            <div key={index} className={`${styles.message} ${styles[msg.sender]}`}>
+              <p>{msg.text}</p>
+              
+              {/* Render answer options if this is a question message */}
+              {msg.customType === 'question' && msg.answeroptions && 
+                typeof msg.answeroptions === 'number' && msg.answeroptions > 0 && (
+                <div className={styles.answerboxes}>
+                  {Array.from({ length: msg.answeroptions }, (_, i) => i + 1).map(optionValue => (
+                    <div key={optionValue} className={styles.answeroptions}>
+                      <button 
+                        className={styles.answeroption} 
+                        onClick={() => sendMessageToRasa(`${optionValue}`)}
+                      />
+                      <div className={styles.answertext}>{optionValue}</div>
                     </div>
-
-
-
-
-
-
-                  )}
-
-                  {!(msg.customType === 'question' && msg.answeroptions && typeof msg.answeroptions === 'number' && msg.answeroptions > 0) && msg.buttons && msg.buttons.map((button, btnIndex) => (
-                    <button
-                      key={btnIndex}
-                      onClick={sendMessageToRasa(button.buttonPayLoad)}
-                      className={styles.answeroption}
-                    >
-                    </button>
                   ))}
-
-
-
                 </div>
+              )}
+              
+              {/* Render buttons if they exist and it's not an answer options message */}
+              {!(msg.customType === 'question' && msg.answeroptions && 
+                typeof msg.answeroptions === 'number' && msg.answeroptions > 0) && 
+                msg.buttons && msg.buttons.map((button, btnIndex) => (
+                <button
+                  key={btnIndex}
+                  onClick={() => sendMessageToRasa(button.payload)}
+                  className={styles.answeroption}
+                />
               ))}
-
-
-
-
-
-
             </div>
-
-          </div>
-
-          <div className={styles.inputcontent}>
-
-            <div className={styles.inputArea}>
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyPress}
-                placeholder="Type your message..."
-              />
-              <button onClick={handleSendMessage}>Send</button>
-            </div>
-
-
-          </div>
-
-
+          ))}
+          {/* Invisible element to scroll to */}
+          <div ref={messagesEndRef} />
         </div>
       </div>
-
-
+      
+      <div className={styles.inputcontent}>
+        <div className={styles.inputArea}>
+          <input
+            type="text"
+            value={inputMessage}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyPress}
+            placeholder="Type your message..."
+          />
+          <button onClick={handleSendMessage}>Send</button>
+        </div>
+      </div>
+      
 
     </div>
   );

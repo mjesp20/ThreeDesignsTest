@@ -1,80 +1,146 @@
-.bottombar {
-    position: fixed;
-    background-color: var(--blue);
-    overflow: hidden;
-    z-index: 1;
-    height: 4em;
-    bottom: 0px;
-    left: 0px;
-    width: 100%;
-  }
-  
-  .topbar {
-    position: fixed;
-    background-color: var(--blue);
-    z-index: 1;
-    height: 5em;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    
-  }
+/* Layout containers */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  .heading{
-    text-align: center;
-    margin-top: 1;
-  }
+/* Header and footer bars */
+.topbar {
+  position: fixed;
+  background-color: #0084FF;
+  z-index: 10;
+  height: 4rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .content{
-    background-color: white;
-    margin-top: 3em;
-  }
+.endbar {
+  background-color: #0084FF;
+  width: 100%;
+  height: 3rem;
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
 
-  .questionbox{
-    background-color: white;
-    width: 80%;
-    height: 5em;
-    margin-left: auto;
-    margin-right: auto;
+/* Main content */
+.content {
+  background-color: white;
+  margin: 6rem auto 4rem;
+  width: 100%;
+  max-width: 900px;
+  padding-top: 1rem;
+}
 
-  }
+/* Headings */
+.heading {
+  color: white;
+  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+}
 
-  .questiondesc{
-    text-align: center;
-    margin-top: 5.5em;
-  }
-  
-  .answerboxes{
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-  }
+/* Question boxes */
+.questionBox {
+  background-color: white;
+  width: 80%;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  box-shadow: 0.5em 1em 1em grey;
+  margin-bottom: 1em;
+}
 
-  .answeroption{
-    background-color: white;
-    border: solid black .2em;
-    width: 3em;
-    height: 3em;
-    border-radius: 2em;
-    margin: 1em auto 0;
-  }
+.questionText {
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
 
-  .active{
-    background-color: red;
-  }
+/* Answer options */
+.answerBoxes {
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  flex-wrap: wrap;
+}
 
-  .endbar{
-    background-color: #0084FF;
-    width: 100%;
-    height: 3em;
-    z-index: 1;
-  }
+.answerOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.5rem;
+  flex: 1;
+  min-width: 60px;
+}
 
-  .nextarrow{
-    background-color: black;
-    width: 2em;
-    height: 2em;
-    margin-right: 2em;
-    margin-left: auto;
-  }
+.answerButton {
+  background-color: white;
+  border: solid #333 0.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.answerButton:hover {
+  transform: scale(1.05);
+  border-color: #0084FF;
+}
+
+.answerButton.active {
+  background-color: #0084FF;
+  border-color: #0084FF;
+}
+
+.answerText {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Submit button */
+.submitButton {
+  display: block;
+  width: 10rem;
+  height: 2.5rem;
+  margin: 2rem auto;
+  font-size: 1rem;
+  background-color: #0084FF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitButton:hover {
+  background-color: #0066cc;
+}
+
+.submitButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Results page */
+.resultsContainer {
+  text-align: center;
+  padding: 2rem;
+}
+
+.resultItem {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}

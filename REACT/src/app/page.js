@@ -9,7 +9,7 @@ export default function HomePage() {
     <div className={styles.buttons}>
       <a className={styles.button} href="/form">Form</a>
       <a className={styles.button} href="/mixed">Mixed</a>
-      <a className={styles.button} href="/chatbot">CA</a>
+      <a className={styles.button} href="/chat">CA</a>
     </div>
   </div>
   )

@@ -15,7 +15,7 @@ import { useState, useEffect, useRef } from "react";
 
     const [messages, setMessages] = useState([]);
     const [inputMessage, setInputMessage] = useState('');
-    const rasaUrl = 'http://localhost:5005/webhooks/rest/webhook';
+    const rasaUrl = 'http://192.168.117.37:5005/webhooks/rest/webhook';
 
     const [selectedAnswer, setSelectedAnswer] = useState(null);
 
