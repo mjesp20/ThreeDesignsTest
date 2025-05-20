@@ -15,7 +15,6 @@ react/node_modules
 /rasa/models
 .next
 /react/.next
-/RASA/actions
 
 # testing
 /coverage
